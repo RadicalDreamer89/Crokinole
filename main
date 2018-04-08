@@ -1,0 +1,123 @@
+package Crokinole;
+
+import basicgraphics.*;
+import basicgraphics.BasicFrame;
+import basicgraphics.images.Picture;
+import java.util.*;
+import java.io.IOException;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowListener;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
+import javafx.scene.shape.Circle;
+
+/**
+ *
+ * @author Warren "Not Wayne" Douglas, wdougl6
+ * @since 29th March, 2018
+ */
+public class Crokinole 
+{
+    
+    //Creates the puck object for the player to fire.
+    public static class Puck extends Sprite
+    {
+        public Picture puck;
+        public SpriteComponent sc;
+        
+        public void piece(SpriteComponent sc) throws IOException
+        {
+            puck = new Picture("UnguardedBoss.png");
+            setPicture(puck);
+            setX(900);
+            setY(500);
+            setVelX(0);
+            setVelY(0);
+            this.sc = sc;
+            sc.addSprite(this);
+        }
+    }    
+    
+    //Creates the power bar designating how hard the puck is thrown.
+    public static class Bar extends Sprite
+    {
+        public Picture bar;
+        public SpriteComponent comp;
+        
+        public void charger(SpriteComponent comp) throws IOException
+        {
+            bar = new Picture("down.png");
+            setPicture(bar);
+            setX(930);
+            setY(499);
+            setVelX(0);
+            setVelY(0);
+            this.comp = comp;
+            comp.addSprite(this);
+        }
+    }
+    
+    
+     
+    
+    public static void main (String [] args) throws IOException
+    {
+        BasicFrame bf = new BasicFrame("Crokinole!");
+        final SpriteComponent sc = new SpriteComponent();
+        Crokinole crok = new Crokinole();
+        
+        
+        MouseListener ml = new MouseListener()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int x, y;
+                x = e.getX();
+                y = e.getY();
+                
+                JOptionPane.showMessageDialog(sc, "Coordinates: X -" + x + " Y - " + y);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        };
+        sc.addMouseListener(ml);
+        
+        
+        
+        sc.setPreferredSize(new Dimension (1900,1000));
+        
+        
+        
+        bf.add("Crokinole!", sc, 0, 0, 1, 1);
+        
+       
+       final Puck p = new Puck();
+       final Bar b = new Bar();
+        
+        bf.show();
+        
+        p.piece(sc);
+        b.charger(sc);
+        sc.start(0,10);
+        
+        
+    }
+}
