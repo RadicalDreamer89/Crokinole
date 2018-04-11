@@ -1,4 +1,4 @@
-package Crokinole;
+package basicgraphics;
 
 import basicgraphics.*;
 import basicgraphics.BasicFrame;
@@ -6,6 +6,8 @@ import basicgraphics.images.Picture;
 import java.util.*;
 import java.io.IOException;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowListener;
 import javax.swing.JFrame;
@@ -68,7 +70,7 @@ public class Crokinole
     {
         BasicFrame bf = new BasicFrame("Crokinole!");
         final SpriteComponent sc = new SpriteComponent();
-        Crokinole crok = new Crokinole();
+        
         
         
         MouseListener ml = new MouseListener()
@@ -112,6 +114,30 @@ public class Crokinole
        final Puck p = new Puck();
        final Bar b = new Bar();
         
+       bf.addKeyListener(new KeyAdapter()
+        {
+            
+            @Override
+            public void keyPressed(KeyEvent ke)
+            {
+                switch (ke.getKeyCode()) 
+                {
+                    case KeyEvent.VK_UP:
+                        p.setVelY(p.getVelY() - 0.2);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        p.setVelX(p.getVelX() + 0.2);
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        p.setVelX(p.getVelX() - 0.2);
+                        break;
+                    default:
+                        break;
+                }
+            }
+                
+        });    
+       
         bf.show();
         
         p.piece(sc);
