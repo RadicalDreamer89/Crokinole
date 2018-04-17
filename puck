@@ -1,20 +1,25 @@
 package basicgraphics;
 
 import basicgraphics.images.Picture;
+import java.awt.*;
 import java.io.IOException;
 
 
 public class Puck extends Sprite
 {
-    
-    
-        public Picture puck;
-        SpriteComponent sc;
-        
+    SpriteComponent sc;
         public void piece(SpriteComponent sc) throws IOException
         {
-            puck = new Picture("UnguardedBoss.png");
-            setPicture(puck);
+            int size = 40;
+            
+            
+            Image im1 = BasicFrame.createImage(size, size);
+            Graphics imgr = im1.getGraphics();
+            imgr.setColor(Color.BLUE);
+            imgr.drawOval(0, 0, size, size);
+            imgr.fillOval(0, 0, size, size);
+            Picture puckB = new Picture(im1);
+            setPicture(puckB);
             setX(900);
             setY(500);
             setVelX(0);
