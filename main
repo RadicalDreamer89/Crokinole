@@ -27,7 +27,21 @@ public class Crokinole
     public static void main (String [] args) throws IOException
     {
         BasicFrame bf = new BasicFrame("Crokinole!");
-        final SpriteComponent sc = new SpriteComponent();
+        final Container cont = bf.getContentPane();
+        final Color Brown = new Color(172,138,115);
+        final SpriteComponent sc = new SpriteComponent(){
+            @Override
+            public void paintBackground(Graphics g) {
+                Dimension d = getSize();
+                g.setColor(Brown);
+                g.fillRect(0, 0, d.width, d.height);
+
+                }
+            };
+        
+        
+        
+        
         
         
         
@@ -72,6 +86,7 @@ public class Crokinole
        final Puck p = new Puck();
        final HitBar b = new HitBar();
        final Board bo = new Board();
+       
      
         
        bf.addKeyListener(new KeyAdapter()
@@ -86,7 +101,7 @@ public class Crokinole
                         p.setVelY(p.getVelY() - 0.2);
                         break;
                     case KeyEvent.VK_RIGHT:
-                        p.setVelX(p.getVelX() + 0.2);
+                        p.setVelX(p.getVelX() + 0.2);                        
                         break;
                     case KeyEvent.VK_LEFT:
                         p.setVelX(p.getVelX() - 0.2);
@@ -100,7 +115,7 @@ public class Crokinole
        
         
         bf.show();
-        bo.gameBoard(sc, 500, 800);
+        bo.gameBoard(sc, 1000, 1000);
         p.piece(sc);
         
         sc.start(0,10);
