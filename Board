@@ -1,0 +1,48 @@
+package basicgraphics;
+
+import basicgraphics.*;
+import basicgraphics.images.Picture;
+import java.awt.*;
+import java.util.*;
+
+
+public class Board extends Sprite
+{
+    SpriteComponent sc;
+    
+    public void gameBoard(SpriteComponent sc, int height, int width)
+    {
+        
+        sc = new SpriteComponent();
+        Image im1 = BasicFrame.createImage(height, width);
+        Graphics imgr = im1.getGraphics();
+        imgr.setColor(Color.BLACK);
+        imgr.drawOval(0, 0, height, width);
+        Picture rim = new Picture(im1);
+        setPicture(rim);
+        setX(900);
+        setY(500);
+        setVelX(0);
+        setVelY(0);
+        
+        this.sc = sc;
+        
+        sc.addSprite(this);
+        
+        /*
+          Image im1 = BasicFrame.createImage(size, size);
+            Graphics imgr = im1.getGraphics();
+            imgr.setColor(Color.BLUE);
+            imgr.drawOval(0, 0, size, size);
+            imgr.fillOval(0, 0, size, size);
+            Picture puckB = new Picture(im1);
+            setPicture(puckB);
+            setX(900);
+            setY(500);
+            setVelX(0);
+            setVelY(0);
+            this.sc = sc;
+            sc.addSprite(this);  
+        */
+    }
+}
