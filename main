@@ -101,7 +101,8 @@ public class Crokinole
                         p.setVelY(p.getVelY() - 0.2);
                         break;
                     case KeyEvent.VK_RIGHT:
-                        p.setVelX(p.getVelX() + 0.2);                        
+                        p.setVelX(p.getVelX() + 0.2);
+                        bo.setVelX(p.getVelX() + 0.2);
                         break;
                     case KeyEvent.VK_LEFT:
                         p.setVelX(p.getVelX() - 0.2);
@@ -115,7 +116,7 @@ public class Crokinole
        
         
         bf.show();
-        bo.gameBoard(sc, 1000, 1000);
+        bo.gameBoard(sc, sc.getHeight()-75, sc.getHeight());
         p.piece(sc);
         
         sc.start(0,10);
