@@ -23,49 +23,7 @@ import javafx.scene.shape.Circle;
  * @since 29th March, 2018
  */
 public class Crokinole 
-{
-    
-    //Creates the puck object for the player to fire.
-    public static class Puck extends Sprite
-    {
-        public Picture puck;
-        public SpriteComponent sc;
-        
-        public void piece(SpriteComponent sc) throws IOException
-        {
-            puck = new Picture("UnguardedBoss.png");
-            setPicture(puck);
-            setX(900);
-            setY(500);
-            setVelX(0);
-            setVelY(0);
-            this.sc = sc;
-            sc.addSprite(this);
-        }
-    }    
-    
-    //Creates the power bar designating how hard the puck is thrown.
-    public static class Bar extends Sprite
-    {
-        public Picture bar;
-        public SpriteComponent comp;
-        
-        public void charger(SpriteComponent comp) throws IOException
-        {
-            bar = new Picture("down.png");
-            setPicture(bar);
-            setX(930);
-            setY(499);
-            setVelX(0);
-            setVelY(0);
-            this.comp = comp;
-            comp.addSprite(this);
-        }
-    }
-    
-    
-     
-    
+{   
     public static void main (String [] args) throws IOException
     {
         BasicFrame bf = new BasicFrame("Crokinole!");
@@ -104,7 +62,7 @@ public class Crokinole
         
         
         
-        sc.setPreferredSize(new Dimension (1900,1000));
+        sc.setPreferredSize(new Dimension (1920,1080));
         
         
         
@@ -112,7 +70,9 @@ public class Crokinole
         
        
        final Puck p = new Puck();
-       final Bar b = new Bar();
+       final HitBar b = new HitBar();
+       final Board bo = new Board();
+     
         
        bf.addKeyListener(new KeyAdapter()
         {
@@ -138,10 +98,11 @@ public class Crokinole
                 
         });    
        
-        bf.show();
         
+        bf.show();
+        bo.gameBoard(sc, 500, 800);
         p.piece(sc);
-        b.charger(sc);
+        
         sc.start(0,10);
         
         
