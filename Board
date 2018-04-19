@@ -3,7 +3,7 @@ package basicgraphics;
 import basicgraphics.*;
 import basicgraphics.images.Picture;
 import java.awt.*;
-import java.util.*;
+
 
 
 public class Board extends Sprite
@@ -11,18 +11,25 @@ public class Board extends Sprite
     SpriteComponent sc;
     
     //Draws the rings of the gameboard.
-    public void gameBoard(SpriteComponent sc, int height, int width)
+    public void gameBoard(SpriteComponent sc, int startX, int startY, int height, int width)
     {
-        Color Brown = new Color(172,138,115);
+       
         
-        Image im1 = BasicFrame.createImage(width, height);
-        Graphics imgr = im1.getGraphics();
+        Image im = BasicFrame.createImage(sc.getWidth(), sc.getHeight());
+        Graphics imgr = im.getGraphics();
         imgr.setColor(Color.BLACK);
-        imgr.drawOval(323, 0, width, height);
-        Picture rim = new Picture(im1);
+        imgr.drawOval(startX, startY, width, height);
+        imgr.setColor(Color.RED);
+        //imgr.drawRect(startX, startY, width, height);
+        Picture rim = new Picture(im);
         setPicture(rim);
         this.sc = sc;
         sc.addSprite(this);
+
     }
     
-}
+    public void partition(Graphics g)            
+    {
+        //Image im = BasicFrame.createImage(yindex, yindex)
+    }
+} 
