@@ -4,7 +4,6 @@ import basicgraphics.*;
 import basicgraphics.BasicFrame;
 import basicgraphics.images.Picture;
 import java.util.*;
-import java.io.IOException;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -22,43 +21,50 @@ import javafx.scene.shape.Circle;
  * @author Warren "Not Wayne" Douglas, wdougl6
  * @since 29th March, 2018
  */
-public class Crokinole 
-{   
-    public static void main (String [] args) 
-    {
+public class Crokinole {
+
+    public static void main(String[] args) {
         BasicFrame bf = new BasicFrame("Crokinole!");
         final Container cont = bf.getContentPane();
-        final Color Brown = new Color(172,138,115);
-        final int CIRCLES = 3;
-        int circStartX = 323;
+        final Color Brown = new Color(172, 138, 115);
+        int circStartX = 300;
         int circStartY = 0;
         int puckCountP = 12;
         int puckCountG = 12;
+        final int rad = 450;
+        final float aX = 750;
+        final float aY =450;
+        final double theta = 0 + Math.toRadians(10);
         
-        final SpriteComponent sc = new SpriteComponent(){
+        final SpriteComponent sc = new SpriteComponent() {
             @Override
             public void paintBackground(Graphics g) {
                 Dimension d = getSize();
                 g.setColor(Brown);
                 g.fillRect(0, 0, d.width, d.height);
 
-                }
-            };
+            }
+        };
+
+        final Puck pP = new Puck();
+        final Puck pG = new Puck();
+        Board bo = new Board();
+        Board ba = new Board();
+        Board bu = new Board();
+        final Board bi = new Board();
         
-        
-        
-        
-        
-        
-        MouseListener ml = new MouseListener()
+        MouseListener ml = new MouseListener() 
         {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) 
+            {
                 int x, y;
                 x = e.getX();
                 y = e.getY();
-                
+
                 JOptionPane.showMessageDialog(sc, "Coordinates: X -" + x + " Y - " + y);
+                
+                
             }
 
             @Override
@@ -78,62 +84,39 @@ public class Crokinole
             }
         };
         sc.addMouseListener(ml);
-        
-        
-        
-        sc.setPreferredSize(new Dimension (1500,900));
-        
-        
-        
+
+        sc.setPreferredSize(new Dimension(1920, 1000));
+
         bf.add("Crokinole!", sc, 0, 0, 1, 1);
-        
-       
-       Puck pP = new Puck();
-       Puck pG = new Puck();
-       Board bo = new Board();
-       Board ba = new Board();
-       Board bu = new Board();
-       final Board bi = new Board();
-       
-     
-        
-       bf.addKeyListener(new KeyAdapter()
-        {
-            
+
+
+        bf.addKeyListener(new KeyAdapter() {
+
             @Override
-            public void keyPressed(KeyEvent ke)
-            {
-                switch (ke.getKeyCode()) 
-                {
+            public void keyPressed(KeyEvent ke) {
+                switch (ke.getKeyCode()) {
                     case KeyEvent.VK_UP:
-                        bi.setVelX(1.5);
+                        
                         break;
                     case KeyEvent.VK_RIGHT:
                         
                         break;
                     case KeyEvent.VK_LEFT:
-                        
+
                         break;
                     default:
                         break;
                 }
             }
-                
-        });    
-       
-        
+
+        });
+
         bf.show();
-        bo.gameBoard(sc, circStartX, circStartY, sc.getHeight(), sc.getHeight());
-        ba.gameBoard(sc, circStartX + 170, circStartY + 180, sc.getHeight() - 350, sc.getHeight() - 350);
-        bu.gameBoard(sc, circStartX + 293, circStartY + 302, sc.getHeight() - 600, sc.getHeight() - 600);
-        bi.gameBoard(sc, circStartX + 422, circStartY + 432, sc.getHeight() - 860, sc.getHeight() - 860);
-
-
-//        pP.pieceP(sc);
+        bo.gameBoard(sc, sc.getWidth(), sc.getHeight());
+        ba.partition(sc);
+        pP.pieceP(sc, 900, 500);
 //        pG.pieceG(sc);
-        
-        sc.start(0,10);
-        
-        
+        sc.start(0, 10);
+
     }
 }
