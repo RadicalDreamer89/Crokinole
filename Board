@@ -1,48 +1,122 @@
 package basicgraphics;
 
 import basicgraphics.*;
+import basicgraphics.BasicFrame;
 import basicgraphics.images.Picture;
+import java.util.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowListener;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
+import javafx.scene.shape.Circle;
 
+/**
+ *
+ * @author Warren "Not Wayne" Douglas, wdougl6
+ * @since 29th March, 2018
+ */
+public class Crokinole {
 
-
-public class Board extends Sprite
-{
-    SpriteComponent sc;
-    
-    //Draws the rings of the gameboard.
-    public void gameBoard(SpriteComponent sc, int imW, int imH)
-    {
+    public static void main(String[] args) {
+        BasicFrame bf = new BasicFrame("Crokinole!");
+        final Container cont = bf.getContentPane();
+        final Color Brown = new Color(172, 138, 115);
+        int circStartX = 300;
+        int circStartY = 0;
+        int puckCountP = 12;
+        int puckCountG = 12;
+        final int rad = 450;
+        final float aX = 750;
+        final float aY =450;
+        final double theta = 0 + Math.toRadians(10);
         
-        Image im = BasicFrame.createImage(imW, imH);
-        Graphics imgr = im.getGraphics();
-        Dimension d = sc.getSize();
-        int rad = (int) (Math.min(d.getHeight(), d.getWidth())/2);
-        imgr.setColor(Color.BLACK);
-        imgr.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
-//        imgr.drawOval((d.width/2 - rad), (d.height/2) - rad, 2 * rad, 2 * rad);
-//      imgr.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
-//      imgr.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
-//        imgr.setColor(Color.RED);
-//        imgr.drawRect(startX, startY, width, height);
-        Picture rim = new Picture(im);
-        setPicture(rim);
-        this.sc = sc;
-        sc.addSprite(this);
+        final SpriteComponent sc = new SpriteComponent() {
+            @Override
+            public void paintBackground(Graphics g) {
+                Dimension d = getSize();
+                g.setColor(Brown);
+                g.fillRect(0, 0, d.width, d.height);
+
+            }
+        };
+
+        final Puck pP = new Puck();
+        final Puck pG = new Puck();
+        Board bo = new Board();
+        Board ba = new Board();
+        Board bu = new Board();
+        final Board bi = new Board();
+        
+        MouseListener ml = new MouseListener() 
+        {
+            @Override
+            public void mouseClicked(MouseEvent e) 
+            {
+                int x, y;
+                x = e.getX();
+                y = e.getY();
+
+                JOptionPane.showMessageDialog(sc, "Coordinates: X -" + x + " Y - " + y);
+                
+                
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        };
+        sc.addMouseListener(ml);
+
+        sc.setPreferredSize(new Dimension(1920, 1000));
+
+        bf.add("Crokinole!", sc, 0, 0, 1, 1);
+
+
+        bf.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent ke) {
+                switch (ke.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                        
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        
+                        break;
+                    case KeyEvent.VK_LEFT:
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        });
+
+        bf.show();
+        bo.gameBoard(sc, sc.getWidth(), sc.getHeight());
+        ba.partition(sc);
+        pP.pieceP(sc, 900, 500);
+//        pG.pieceG(sc);
+        sc.start(0, 10);
+
     }
-    
-    public void partition(SpriteComponent sc)            
-    {
-//        Image im = BasicFrame.createImage(sc.getWidth(), sc.getHeight());
-//        Graphics g = im.getGraphics();
-//        g.setColor(Color.BLACK);
-//        g.drawLine(301, sc.getHeight()/2, 476, sc.getHeight()/2);
-//        g.drawLine(1025, sc.getHeight()/2, 1200, sc.getHeight()/2);
-//        g.drawLine(sc.getWidth()/2, 0, sc.getWidth()/2, 172);
-//        g.drawLine(sc.getWidth()/2, 721, sc.getWidth()/2, 900);
-//        Picture part = new Picture(im);
-//        setPicture(part);
-//        this.sc = sc;
-//        sc.addSprite(this);
-    }
-} 
+}
