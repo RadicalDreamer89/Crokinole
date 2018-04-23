@@ -26,8 +26,8 @@ public class Puck extends Sprite
         imgr.fillOval(0, 0, size, size);
         Picture puckP = new Picture(im1);
         setPicture(puckP);
-        setX((Math.cos(theta)*radius+d.width/2));
-        setY((Math.sin(theta)*radius+d.height/2));
+        setCenterX((Math.cos(theta)*radius+d.width/2));
+        setCenterY((Math.sin(theta)*radius+d.height/2));
         setVelX(0);
         setVelY(0);
         this.sc = sc;
@@ -49,8 +49,8 @@ public class Puck extends Sprite
         imgr.drawRect(0, 0, size, size);
         Picture puckG = new Picture(im1);
         setPicture(puckG);
-        setX((Math.cos(theta)*radius+d.width/2));
-        setY((Math.sin(theta)*radius+d.height/2));
+        setCenterX((Math.cos(theta)*radius+d.width/2));
+        setCenterY((Math.sin(theta)*radius+d.height/2));
         setVelX(0);
         setVelY(0);
         this.sc = sc;
@@ -60,35 +60,37 @@ public class Puck extends Sprite
     public void moveLeft() 
     {
         Dimension d = sc.getSize();
-        int radius = (int)(Math.min(d.getHeight(),d.getWidth()) / 2);
+        int radius = (int)(Math.min(d.height,d.width) / 2);
         theta += .01;
-        setX((Math.cos(theta)*radius+d.width/2));
-        setY((Math.sin(theta)*radius+d.height/2));
+        setCenterX((Math.cos(theta)*radius+d.width/2));
+        setCenterY((Math.sin(theta)*radius+d.height/2));
     }
     
     public void moveRight()
     {
         Dimension d = sc.getSize();
-        int radius = (int)(Math.min(d.getHeight(),d.getWidth()) / 2);
+        int radius = (int)(Math.min(d.height,d.width) / 2);
         theta -= .01;
-        setX(Math.cos(theta)*radius+d.width/2);
-        setY(Math.sin(theta)*radius+d.height/2);
+        setCenterX(Math.cos(theta)*radius+d.width/2);
+        setCenterY(Math.sin(theta)*radius+d.height/2);
     }
     
     
     @Override
     public void preMove()
     {
-        this.setVelX(0);
-        this.setVelY(0);
+//        this.setVelX(0);
+//        this.setVelY(0);
     }
     @Override
     public void postMove()
     {
         
-        this.setVelX((this.getVelX() - 0.002));
-        this.setVelY((this.getVelY() - 0.002));
+//        this.setVelX((this.getVelX() - 0.002));
+//        this.setVelY((this.getVelY() - 0.002));
         
         
     }
+    
+ 
 }
