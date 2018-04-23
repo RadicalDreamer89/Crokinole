@@ -3,13 +3,19 @@ package basicgraphics;
 import basicgraphics.images.Picture;
 import java.awt.*;
 
-public class Puck extends Sprite {
+public class Puck extends Sprite 
+{
 
     SpriteComponent sc;
     double theta = Math.toRadians(10);
     
+        
+    
 
-    public void pieceP(SpriteComponent sc, int x, int y) {
+    public void pieceP(SpriteComponent sc) 
+    {
+        Dimension d = sc.getSize();
+        int radius = (int)(Math.min(d.getHeight(),d.getWidth()) / 2);
         int size = 40;
         final Color purple = new Color(140, 40, 142);
 
@@ -20,39 +26,69 @@ public class Puck extends Sprite {
         imgr.fillOval(0, 0, size, size);
         Picture puckP = new Picture(im1);
         setPicture(puckP);
-        setX(x);
-        setY(y);
+        setX((Math.cos(theta)*radius+d.width/2));
+        setY((Math.sin(theta)*radius+d.height/2));
         setVelX(0);
         setVelY(0);
         this.sc = sc;
         sc.addSprite(this);
     }
 
-    public void pieceG(SpriteComponent sc, int x, int y) 
+    public void pieceG(SpriteComponent sc) 
     {
         int size = 40;
 
+        Dimension d = sc.getSize();
+        int radius = (int)(Math.min(d.getHeight(),d.getWidth()) / 2);
         Image im1 = BasicFrame.createImage(size + 20, size + 20);
         Graphics imgr = im1.getGraphics();
         imgr.setColor(Color.yellow);
         imgr.drawOval(0, 0, size, size);
         imgr.fillOval(0, 0, size, size);
+        imgr.setColor(Color.RED);
+        imgr.drawRect(0, 0, size, size);
         Picture puckG = new Picture(im1);
         setPicture(puckG);
-        setX(x);
-        setY(y);
+        setX((Math.cos(theta)*radius+d.width/2));
+        setY((Math.sin(theta)*radius+d.height/2));
         setVelX(0);
         setVelY(0);
         this.sc = sc;
         sc.addSprite(this);
     }
 
-    public void preMove() 
+    public void moveLeft() 
     {
         Dimension d = sc.getSize();
         int radius = (int)(Math.min(d.getHeight(),d.getWidth()) / 2);
         theta += .01;
+        setX((Math.cos(theta)*radius+d.width/2));
+        setY((Math.sin(theta)*radius+d.height/2));
+    }
+    
+    public void moveRight()
+    {
+        Dimension d = sc.getSize();
+        int radius = (int)(Math.min(d.getHeight(),d.getWidth()) / 2);
+        theta -= .01;
         setX(Math.cos(theta)*radius+d.width/2);
         setY(Math.sin(theta)*radius+d.height/2);
+    }
+    
+    
+    @Override
+    public void preMove()
+    {
+        this.setVelX(0);
+        this.setVelY(0);
+    }
+    @Override
+    public void postMove()
+    {
+        
+        this.setVelX((this.getVelX() - 0.002));
+        this.setVelY((this.getVelY() - 0.002));
+        
+        
     }
 }
