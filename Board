@@ -12,17 +12,17 @@ public class Board extends Sprite
     
     
     //Draws the rings of the gameboard.
-    public void gameBoard(SpriteComponent sc, int imW, int imH)
+    public void gameBoard(SpriteComponent sc)
     {
         Dimension d = sc.getSize();
         int rad = (int) Math.min(d.getHeight(), d.getWidth())/2;
         
-        Image im = BasicFrame.createImage(imW, imH);
+        Image im = BasicFrame.createImage(d.width, d.height);
         Graphics imgr = im.getGraphics();
         imgr.setColor(Color.BLACK);
         
         imgr.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
-        imgr.drawOval(d.width/2 - (rad/2)-118, (d.height/2) - (rad/2)-90, rad+220, rad+179);
+//        imgr.drawOval(d.width/2 - (rad/2)-118, (d.height/2) - (rad/2)-90, rad+220, rad+179);
 //        imgr.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
 //        imgr.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
         imgr.setColor(Color.RED);
