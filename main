@@ -36,10 +36,8 @@ public class Crokinole
         BasicFrame bf = new BasicFrame("Crokinole!");
         final Container cont = bf.getContentPane();
         final Color Brown = new Color(172, 138, 115);
-        int puckCountP = 12;
-        int puckCountG = 12;
-        Team Purple;
-        Team Gold;
+      
+        
         
        
         
@@ -60,19 +58,19 @@ public class Crokinole
         
         MouseListener ml = new MouseListener() 
         {
-            int force= 0; 
-            int start;
-            int end;
+            double force= 0; 
+            double startX, startY;
+            double endX, endY;
             
             @Override
             public void mouseClicked(MouseEvent e) 
             {
-//                int x, y;
-//                x = e.getX();
-//                y = e.getY();
-//
-//                JOptionPane.showMessageDialog(sc, "Coordinates: X -" + x + " Y - " + y);
-//                
+                int x, y;
+                x = e.getX();
+                y = e.getY();
+
+                JOptionPane.showMessageDialog(sc, "Coordinates: X -" + x + " Y - " + y);
+                
                 
             }
 
@@ -80,17 +78,21 @@ public class Crokinole
             @Override
             public void mousePressed(MouseEvent e) 
             {
-                start = e.getY() + e.getX();
+                startX = e.getX();
+                startY = e.getY();
+                
             }
 
             @Override
             public void mouseReleased(MouseEvent e) 
             {
                 
-                end = e.getY() + e.getX();
-                force = end - start;
-                pP.setVelX(-Math.abs(force/2));
-                pP.setVelY(-Math.abs(force/2));
+                endX =  e.getX() - startX;
+                endY =  e.getY() - startY;
+                force = Math.sqrt(Math.pow(endX, 2) + Math.pow(endY, 2));
+                pP.setVelX((15 * Math.tanh(0.5 * force))*(endX/force));
+                pP.setVelY((15 * Math.tanh(0.5 * force)) * (endY/force));
+                
                 
                 
                        
@@ -109,8 +111,9 @@ public class Crokinole
 
         sc.setPreferredSize(new Dimension(1920, 1000));
 
-        bf.add("Crokinole!", sc, 0, 0, 1, 1);
-
+        bf.add(layout, "game", sc);
+        bf.add(layout, "leftTop", new JLabel("Purple Score -"));
+        bf.add(layout, "leftBot", new JLabel("Gold Score -"));
 
         
         final Dimension d = sc.getSize();
@@ -141,7 +144,7 @@ public class Crokinole
         });
 
         bf.show();
-        bo.gameBoard(sc, sc.getWidth(), sc.getHeight());
+        bo.gameBoard(sc);
 //        ba.partition(sc);
         pP.pieceP(sc);
 //        pG.pieceG(sc);
