@@ -10,21 +10,23 @@ public class Board extends Sprite
 {
     SpriteComponent sc;
     
+    
     //Draws the rings of the gameboard.
     public void gameBoard(SpriteComponent sc, int imW, int imH)
     {
+        Dimension d = sc.getSize();
+        int rad = (int) Math.min(d.getHeight(), d.getWidth())/2;
         
         Image im = BasicFrame.createImage(imW, imH);
         Graphics imgr = im.getGraphics();
-        Dimension d = sc.getSize();
-        int rad = (int) (Math.min(d.getHeight(), d.getWidth())/2);
         imgr.setColor(Color.BLACK);
+        
         imgr.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
-//        imgr.drawOval((d.width/2 - rad), (d.height/2) - rad, 2 * rad, 2 * rad);
-//      imgr.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
-//      imgr.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
-//        imgr.setColor(Color.RED);
-//        imgr.drawRect(startX, startY, width, height);
+        imgr.drawOval(d.width/2 - (rad/2)-118, (d.height/2) - (rad/2)-90, rad+220, rad+179);
+//        imgr.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
+//        imgr.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
+        imgr.setColor(Color.RED);
+        imgr.drawRect(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
         Picture rim = new Picture(im);
         setPicture(rim);
         this.sc = sc;
@@ -33,16 +35,19 @@ public class Board extends Sprite
     
     public void partition(SpriteComponent sc)            
     {
-//        Image im = BasicFrame.createImage(sc.getWidth(), sc.getHeight());
-//        Graphics g = im.getGraphics();
-//        g.setColor(Color.BLACK);
-//        g.drawLine(301, sc.getHeight()/2, 476, sc.getHeight()/2);
-//        g.drawLine(1025, sc.getHeight()/2, 1200, sc.getHeight()/2);
-//        g.drawLine(sc.getWidth()/2, 0, sc.getWidth()/2, 172);
-//        g.drawLine(sc.getWidth()/2, 721, sc.getWidth()/2, 900);
-//        Picture part = new Picture(im);
-//        setPicture(part);
-//        this.sc = sc;
-//        sc.addSprite(this);
+        Dimension d = sc.getSize();
+        int rad = (int) Math.min(d.getHeight(), d.getWidth())/2;
+        
+        Image im = BasicFrame.createImage(sc.getWidth(), sc.getHeight());
+        Graphics g = im.getGraphics();
+        g.setColor(Color.BLACK);
+//        g.drawLine(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
+        g.drawLine(1285, sc.getHeight()/2, 1460, sc.getHeight()/2);
+        g.drawLine(sc.getWidth()/2, 0, sc.getWidth()/2, 172);
+        g.drawLine(sc.getWidth()/2, 821, sc.getWidth()/2, 1000);
+        Picture part = new Picture(im);
+        setPicture(part);
+        this.sc = sc;
+        sc.addSprite(this);
     }
 } 
