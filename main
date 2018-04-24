@@ -26,10 +26,10 @@ import javax.swing.JLabel;
 public class Crokinole 
 {
     static String[][] layout = {
-        {"leftTop","game","game"},
-        {"leftTop","game","game"},
-        {"leftBot","game","game"},
-        {"leftBot","game","game"},
+        {"leftTop","game","puckCountP"},
+        {"leftTop","game","puckCountP"},
+        {"leftBot","game","puckCountG"},
+        {"leftBot","game","puckCountG"},
     };
     
     public static void main(String[] args) {
@@ -40,9 +40,9 @@ public class Crokinole
         int puckCountG = 12;
         int scoreP = 0;
         int scoreG = 0;
+        
         final Puck pP = new Puck();
         final Puck pG = new Puck();
-        Board bo = new Board();
         Bumper b1 = new Bumper();
         Bumper b2 = new Bumper();
         Bumper b3 = new Bumper();
@@ -51,7 +51,9 @@ public class Crokinole
         Bumper b6 = new Bumper();
         Bumper b7 = new Bumper();
         Bumper b8 = new Bumper();
-       
+        
+        
+        
         
         final SpriteComponent sc = new SpriteComponent() {
             @Override
@@ -68,10 +70,21 @@ public class Crokinole
                 g.drawOval((d.width/2 - rad/2), d.height/2 - rad/2,  rad, rad);
                 g.drawOval((d.width/2 - rad/4), d.height/2 - rad/4,  rad/2, rad/2);
                 g.drawOval((d.width/2 - rad/16), d.height/2 - rad/16,  rad/8, rad/8);
-
+                
+                g.drawLine(d.width/2, 1000, d.width/2, 750);
+                g.drawLine(d.width/2, 0, d.width/2, 250);
+                g.drawLine(460, 500, 710, 500);
+                g.drawLine(1210, 500, 1460, 500);
             }
         };
-
+//        Dimension dim = sc.getSize();
+//        double centerX = dim.getWidth()/2;
+//        double centerY = dim.getHeight()/2;
+//        double outerRim = Math.hypot(centerX - 1460, centerY - 500);
+//        double outerRim = Math.sqrt(Math.pow(1371 - centerX, 2) + Math.pow(215 - centerY, 2));
+        
+        
+        
         
         
 //        if(puckCountP % 2 == 0)
@@ -96,6 +109,7 @@ public class Crokinole
 //            pG.setCenterY(812);
 //        }
 
+        
         
         MouseListener ml = new MouseListener() 
         {
@@ -130,11 +144,9 @@ public class Crokinole
                 
                 endX =  e.getX() - startX;
                 endY =  e.getY() - startY;
-//                int xCoord = e.getX();
-//                int yCoord = e.getY();
                 force = Math.sqrt(Math.pow(endX, 2) + Math.pow(endY, 2));
-                pP.setVelX((3 * Math.tanh(0.5 * force)) * (endX/force));
-                pP.setVelY((3 * Math.tanh(0.5 * force)) * (endY/force));
+                pP.setVelX((10 * Math.tanh(0.5 * force)) * (endX/force));
+                pP.setVelY((10 * Math.tanh(0.5 * force)) * (endY/force));
 //                JOptionPane.showMessageDialog(sc, "Distance - " + (endX - endY) + "Coord X-" + xCoord + "Y-" + yCoord);
                 
                 
@@ -157,10 +169,10 @@ public class Crokinole
         bf.add(layout, "game", sc);
         bf.add(layout, "leftTop", new JLabel("Purple Score -" + scoreP));
         bf.add(layout, "leftBot", new JLabel("Gold Score -" + scoreG));
-
+        bf.add(layout, "puckCountP", new JLabel("Purple Pucks Remaining - " + puckCountP));
+        bf.add(layout, "puckCountG", new JLabel("Gold Pucks Remaining - " + puckCountG));
         
-        final Dimension d = sc.getSize();
-        final int radius = (int)(Math.min(d.getHeight(),d.getWidth()) / 2);
+        
         
         bf.addKeyListener(new KeyAdapter() {
 
@@ -188,18 +200,19 @@ public class Crokinole
 
         
 
+        bf.show();
         pP.pieceP(sc);
         b1.Bumper(sc, 850, 557);
-        b2.Bumper(sc, 845, 461);
-        b3.Bumper(sc, 911, 390);
+        b2.Bumper(sc, 847, 461);
+        b3.Bumper(sc, 911, 392);
         b4.Bumper(sc, 1015, 390);
         b5.Bumper(sc, 1080, 460);
         b6.Bumper(sc, 1077, 555);
-        b7.Bumper(sc, 1015, 616);
-        b8.Bumper(sc, 911, 616);
+        b7.Bumper(sc, 1015, 618);
+        b8.Bumper(sc, 911, 618);
         
 
-        bf.show();
+//        bf.show();
                   
         sc.start(0,10);
         
