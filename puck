@@ -26,8 +26,8 @@ public class Puck extends Sprite
         imgr.fillOval(0, 0, size, size);
         Picture puckP = new Picture(im1);
         setPicture(puckP);
-        setCenterX((Math.cos(theta)*radius+d.width/2));
-        setCenterY((Math.sin(theta)*radius+d.height/2));
+        setCenterX((Math.cos(theta)*radius+d.width/2)+10);
+        setCenterY((Math.sin(theta)*radius+d.height/2)+10);
         setVelX(0);
         setVelY(0);
         this.sc = sc;
@@ -45,8 +45,6 @@ public class Puck extends Sprite
         imgr.setColor(Color.yellow);
         imgr.drawOval(0, 0, size, size);
         imgr.fillOval(0, 0, size, size);
-        imgr.setColor(Color.RED);
-        imgr.drawRect(0, 0, size, size);
         Picture puckG = new Picture(im1);
         setPicture(puckG);
         setCenterX((Math.cos(theta)*radius+d.width/2));
@@ -62,8 +60,8 @@ public class Puck extends Sprite
         Dimension d = sc.getSize();
         int radius = (int)(Math.min(d.height,d.width) / 2);
         theta += .01;
-        setCenterX((Math.cos(theta)*radius+d.width/2));
-        setCenterY((Math.sin(theta)*radius+d.height/2));
+        setCenterX((Math.cos(theta)*radius+d.width/2)+10);
+        setCenterY((Math.sin(theta)*radius+d.height/2)+10);
     }
     
     public void moveRight()
@@ -71,24 +69,21 @@ public class Puck extends Sprite
         Dimension d = sc.getSize();
         int radius = (int)(Math.min(d.height,d.width) / 2);
         theta -= .01;
-        setCenterX(Math.cos(theta)*radius+d.width/2);
-        setCenterY(Math.sin(theta)*radius+d.height/2);
+        setCenterX((Math.cos(theta)*radius+d.width/2)+10);
+        setCenterY((Math.sin(theta)*radius+d.height/2)+10);
     }
     
     
-    @Override
-    public void preMove()
-    {
-//        this.setVelX(0);
-//        this.setVelY(0);
-    }
+
     @Override
     public void postMove()
     {
-        
-//        this.setVelX((this.getVelX() - 0.002));
-//        this.setVelY((this.getVelY() - 0.002));
-        
+//        if(this.getVelX() !=0 && this.getVelY() != 0)
+//        {
+//            this.setVelX(getVelX()-0.3);
+//            this.setVelY(getVelY()+0.3);
+//        }
+
         
     }
     
