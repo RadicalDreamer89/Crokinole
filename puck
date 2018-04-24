@@ -28,11 +28,13 @@ public class Puck extends Sprite
         setPicture(puckP);
         setCenterX((Math.cos(theta)*radius+d.width/2)+10);
         setCenterY((Math.sin(theta)*radius+d.height/2)+10);
+        System.out.println("HERE");
         setVelX(0);
         setVelY(0);
         this.sc = sc;
         sc.addSprite(this);
     }
+
 
     public void pieceG(SpriteComponent sc) 
     {
@@ -73,16 +75,22 @@ public class Puck extends Sprite
         setCenterY((Math.sin(theta)*radius+d.height/2)+10);
     }
     
-    
+    @Override
+    public void preMove()
+    {
+       
+    }
 
     @Override
     public void postMove()
     {
-//        if(this.getVelX() !=0 && this.getVelY() != 0)
-//        {
-//            this.setVelX(getVelX()-0.3);
-//            this.setVelY(getVelY()+0.3);
-//        }
+        Dimension dim = sc.getSize();
+        int radius = (int)(Math.min(dim.height,dim.width) / 2)+10;
+        double centerX = dim.getWidth()/2;
+        double centerY = dim.getHeight()/2;
+        double puckLoc = Math.sqrt(Math.pow(this.getX() - centerX,2) + Math.pow(this.getY()- centerY,2));
+        if(puckLoc > radius ||  puckLoc > radius)
+            this.setActive(false);
 
         
     }
