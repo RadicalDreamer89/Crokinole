@@ -55,9 +55,11 @@ public class Crokinole
         
         
         
-        final SpriteComponent sc = new SpriteComponent() {
+        final SpriteComponent sc = new SpriteComponent() 
+        {
             @Override
-            public void paintBackground(Graphics g) {
+            public void paintBackground(Graphics g) 
+            {
                 Dimension d = getSize();
                 int rad = (int) Math.min(d.getHeight(), d.getWidth())/2;
                 
@@ -75,39 +77,17 @@ public class Crokinole
                 g.drawLine(d.width/2, 0, d.width/2, 250);
                 g.drawLine(460, 500, 710, 500);
                 g.drawLine(1210, 500, 1460, 500);
+                
+                int a = d.width / 2;
+                int b = d.height / 2;
+                int m = Math.min(a, b);
+                int r2 = Math.abs(m - rad) / 2;
+                g.setColor(Color.blue);
+                
+                
             }
-        };
-//        Dimension dim = sc.getSize();
-//        double centerX = dim.getWidth()/2;
-//        double centerY = dim.getHeight()/2;
-//        double outerRim = Math.hypot(centerX - 1460, centerY - 500);
-//        double outerRim = Math.sqrt(Math.pow(1371 - centerX, 2) + Math.pow(215 - centerY, 2));
-        
-        
-        
-        
-        
-//        if(puckCountP % 2 == 0)
-//        {
-//            pP.setCenterX(1375);
-//            pP.setCenterY(804);
-//        }
-//        else if(puckCountP % 2 == 1)
-//        {
-//            pP.setCenterX(590);
-//            pP.setCenterY(184);
-//        }
-//        
-//        if(puckCountG % 2 == 0)
-//        {
-//            pG.setCenterX(1365);
-//            pG.setCenterY(204);
-//        }
-//        else if(puckCountG % 2 ==1)
-//        {
-//            pG.setCenterX(572);
-//            pG.setCenterY(812);
-//        }
+
+                };
 
         
         
@@ -145,8 +125,8 @@ public class Crokinole
                 endX =  e.getX() - startX;
                 endY =  e.getY() - startY;
                 force = Math.sqrt(Math.pow(endX, 2) + Math.pow(endY, 2));
-                pP.setVelX((10 * Math.tanh(0.5 * force)) * (endX/force));
-                pP.setVelY((10 * Math.tanh(0.5 * force)) * (endY/force));
+                pP.setVelX((3 * Math.tanh(0.5 * force)) * (endX/force));
+                pP.setVelY((3 * Math.tanh(0.5 * force)) * (endY/force));
 //                JOptionPane.showMessageDialog(sc, "Distance - " + (endX - endY) + "Coord X-" + xCoord + "Y-" + yCoord);
                 
                 
@@ -179,20 +159,13 @@ public class Crokinole
             @Override
             public void keyPressed(KeyEvent ke) {
                 switch (ke.getKeyCode()) {
-                    
-                    
-                        
-                    case KeyEvent.VK_UP:
-                        
-                        break;
+    
                     case KeyEvent.VK_RIGHT:
                         pP.moveRight();
                         break;
                     case KeyEvent.VK_LEFT:
                         pP.moveLeft();
-                        break;
-                    default:
-                        break;
+
                 }
             }
 
@@ -202,17 +175,16 @@ public class Crokinole
 
         bf.show();
         pP.pieceP(sc);
-        b1.Bumper(sc, 850, 557);
-        b2.Bumper(sc, 847, 461);
-        b3.Bumper(sc, 911, 392);
-        b4.Bumper(sc, 1015, 390);
-        b5.Bumper(sc, 1080, 460);
-        b6.Bumper(sc, 1077, 555);
-        b7.Bumper(sc, 1015, 618);
-        b8.Bumper(sc, 911, 618);
+        b1.Bumper(sc);
+//        b2.Bumper(sc, 847, 461);
+//        b3.Bumper(sc, 911, 392);
+//        b4.Bumper(sc, 1015, 390);
+//        b5.Bumper(sc, 1080, 460);
+//        b6.Bumper(sc, 1077, 555);
+//        b7.Bumper(sc, 1015, 618);
+//        b8.Bumper(sc, 911, 618);
         
 
-//        bf.show();
                   
         sc.start(0,10);
         
