@@ -1,4 +1,103 @@
 package basicgraphics;
+package basicgraphics;
+
+import basicgraphics.images.Picture;
+import java.awt.*;
+
+public class Puck extends Sprite 
+{
+
+    SpriteComponent sc;
+    double theta = Math.toRadians(10);
+    
+        
+    
+
+    public void pieceP(SpriteComponent sc) 
+    {
+        Dimension d = sc.getSize();
+        int radius = (int)(Math.min(d.getHeight(),d.getWidth()) / 2);
+        int size = 40;
+        final Color purple = new Color(140, 40, 142);
+
+        Image im1 = BasicFrame.createImage(size + 20, size + 20);
+        Graphics imgr = im1.getGraphics();
+        imgr.setColor(purple);
+        imgr.drawOval(0, 0, size, size);
+        imgr.fillOval(0, 0, size, size);
+        Picture puckP = new Picture(im1);
+        setPicture(puckP);
+        setCenterX((Math.cos(theta)*radius+d.width/2)+10);
+        setCenterY((Math.sin(theta)*radius+d.height/2)+10);
+        System.out.println("HERE");
+        setVelX(0);
+        setVelY(0);
+        this.sc = sc;
+        sc.addSprite(this);
+    }
+
+
+    public void pieceG(SpriteComponent sc) 
+    {
+        int size = 40;
+
+        Dimension d = sc.getSize();
+        int radius = (int)(Math.min(d.getHeight(),d.getWidth()) / 2);
+        Image im1 = BasicFrame.createImage(size + 20, size + 20);
+        Graphics imgr = im1.getGraphics();
+        imgr.setColor(Color.yellow);
+        imgr.drawOval(0, 0, size, size);
+        imgr.fillOval(0, 0, size, size);
+        Picture puckG = new Picture(im1);
+        setPicture(puckG);
+        setCenterX((Math.cos(theta)*radius+d.width/2));
+        setCenterY((Math.sin(theta)*radius+d.height/2));
+        setVelX(0);
+        setVelY(0);
+        this.sc = sc;
+        sc.addSprite(this);
+    }
+
+    public void moveLeft() 
+    {
+        Dimension d = sc.getSize();
+        int radius = (int)(Math.min(d.height,d.width) / 2);
+        theta += .01;
+        setCenterX((Math.cos(theta)*radius+d.width/2)+10);
+        setCenterY((Math.sin(theta)*radius+d.height/2)+10);
+    }
+    
+    public void moveRight()
+    {
+        Dimension d = sc.getSize();
+        int radius = (int)(Math.min(d.height,d.width) / 2);
+        theta -= .01;
+        setCenterX((Math.cos(theta)*radius+d.width/2)+10);
+        setCenterY((Math.sin(theta)*radius+d.height/2)+10);
+    }
+    
+    @Override
+    public void preMove()
+    {
+       
+    }
+
+    @Override
+    public void postMove()
+    {
+        Dimension dim = sc.getSize();
+        int radius = (int)(Math.min(dim.height,dim.width) / 2)+10;
+        double centerX = dim.getWidth()/2;
+        double centerY = dim.getHeight()/2;
+        double puckLoc = Math.sqrt(Math.pow(this.getX() - centerX,2) + Math.pow(this.getY()- centerY,2));
+        if(puckLoc > radius ||  puckLoc > radius)
+            this.setActive(false);
+
+        
+    }
+    
+ 
+}
 
 import basicgraphics.images.Picture;
 import java.awt.*;
