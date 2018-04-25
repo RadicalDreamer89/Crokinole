@@ -41,7 +41,29 @@ public class Crokinole
         int scoreP = 0;
         int scoreG = 0;
         
-        final Puck pP = new Puck();
+        final Puck pP = new Puck()
+        {
+          @Override
+            public void processEvent(SpriteCollisionEvent se)
+            {
+                if(se.eventType==CollisionEventType.SPRITE)
+                {
+                    Sprite sp2 = se.sprite2;
+                    
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    sp2.setVelX(xVel1);
+                    sp2.setVelY(yVel1);
+                    
+                    this.setVelX(xVel2);
+                    this.setVelY(yVel2);
+
+                }
+            }  
+        };
         final Puck pG = new Puck();
         Bumper b1 = new Bumper();
         Bumper b2 = new Bumper();
@@ -73,17 +95,25 @@ public class Crokinole
                 g.drawOval((d.width/2 - rad/4), d.height/2 - rad/4,  rad/2, rad/2);
                 g.drawOval((d.width/2 - rad/16), d.height/2 - rad/16,  rad/8, rad/8);
                 
+                int centerX = getWidth() /2;
+                int centerY = getHeight() / 2;
+                int m = Math.min(centerX, centerY);
+                int r2 = Math.abs(m - rad) / 2;
+                
+                g.setColor(Color.blue);
+                for(int i = 0; i < 8; i++) 
+                {
+                    double dist = 2 * Math.PI * i / 8;
+                    int x = (int) Math.round(centerX + rad * Math.cos(dist));
+                    int y = (int) Math.round(centerY + rad * Math.sin(dist));
+                    g.drawOval(centerX - rad, centerY - rad, 2 * rad, 2 * rad);
+                    g.fillOval(x - r2, y - r2, 2 * r2, 2 * r2);
+                }
+                
                 g.drawLine(d.width/2, 1000, d.width/2, 750);
                 g.drawLine(d.width/2, 0, d.width/2, 250);
                 g.drawLine(460, 500, 710, 500);
-                g.drawLine(1210, 500, 1460, 500);
-                
-                int a = d.width / 2;
-                int b = d.height / 2;
-                int m = Math.min(a, b);
-                int r2 = Math.abs(m - rad) / 2;
-                g.setColor(Color.blue);
-                
+                g.drawLine(1210, 500, 1460, 500);                
                 
             }
 
@@ -125,8 +155,9 @@ public class Crokinole
                 endX =  e.getX() - startX;
                 endY =  e.getY() - startY;
                 force = Math.sqrt(Math.pow(endX, 2) + Math.pow(endY, 2));
-                pP.setVelX((3 * Math.tanh(0.5 * force)) * (endX/force));
-                pP.setVelY((3 * Math.tanh(0.5 * force)) * (endY/force));
+                final double width=.005, amp = 10.0;
+                pP.setVelX((amp * Math.tanh(width * force)) * (endX/force));
+                pP.setVelY((amp * Math.tanh(width * force)) * (endY/force));
 //                JOptionPane.showMessageDialog(sc, "Distance - " + (endX - endY) + "Coord X-" + xCoord + "Y-" + yCoord);
                 
                 
@@ -143,6 +174,8 @@ public class Crokinole
             }
         };
         sc.addMouseListener(ml);
+        
+     
 
         sc.setPreferredSize(new Dimension(1920, 1000));
 
@@ -174,6 +207,7 @@ public class Crokinole
         
 
         bf.show();
+        pG.pieceG(sc);
         pP.pieceP(sc);
         b1.Bumper(sc);
 //        b2.Bumper(sc, 847, 461);
@@ -184,7 +218,7 @@ public class Crokinole
 //        b7.Bumper(sc, 1015, 618);
 //        b8.Bumper(sc, 911, 618);
         
-
+        
                   
         sc.start(0,10);
         
