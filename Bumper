@@ -1,0 +1,33 @@
+package basicgraphics;
+
+import basicgraphics.images.Picture;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+
+public class Bumper extends Sprite
+{
+    int size = 10;
+    private SpriteComponent sc;
+    public void Bumper(SpriteComponent sc)
+    {   
+        
+        
+        
+        Image im1 = BasicFrame.createImage(size+5, size+5);
+        Graphics imgr = im1.getGraphics();
+        imgr.setColor(Color.DARK_GRAY);
+        imgr.drawOval(0, 0, size, size);
+        imgr.fillOval(0, 0, size, size);
+        Picture bump = new Picture(im1);
+        setPicture(bump);
+        setVelX(0);
+        setVelY(0);
+        this.sc = sc;
+        sc.addSprite(this);
+        
+    }
+
+}
