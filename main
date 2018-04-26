@@ -5,6 +5,8 @@ import basicgraphics.BasicFrame;
 import basicgraphics.images.Picture;
 import java.util.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -15,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import javafx.scene.shape.Circle;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /**
@@ -35,6 +38,15 @@ public class Crokinole
     public static void main(String[] args) {
         BasicFrame bf = new BasicFrame("Crokinole!");
         final Container cont = bf.getContentPane();
+        final CardLayout cards = new CardLayout();
+//        cont.setLayout(cards);
+//        BasicContainer bc1 = new BasicContainer();
+//        cont.add(bc1, "Splash");
+//        final BasicContainer bc2 = new BasicContainer();
+//        cont.add(bc2, "About");
+//        final BasicContainer bc3 = new BasicContainer();
+//        cont.add(bc3, "Game");
+               
         final Color Brown = new Color(172, 138, 115);
         int puckCountP = 12;
         int puckCountG = 12;
@@ -46,6 +58,7 @@ public class Crokinole
           @Override
             public void processEvent(SpriteCollisionEvent se)
             {
+          
                 if(se.eventType==CollisionEventType.SPRITE)
                 {
                     Sprite sp2 = se.sprite2;
@@ -58,21 +71,31 @@ public class Crokinole
                     sp2.setVelX(xVel1);
                     sp2.setVelY(yVel1);
                     
-                    this.setVelX(xVel2);
-                    this.setVelY(yVel2);
+                    this.setVelX(-xVel2);
+                    this.setVelY(-yVel2);
 
                 }
             }  
         };
         final Puck pG = new Puck();
-        Bumper b1 = new Bumper();
-        Bumper b2 = new Bumper();
-        Bumper b3 = new Bumper();
-        Bumper b4 = new Bumper();
-        Bumper b5 = new Bumper();
-        Bumper b6 = new Bumper();
-        Bumper b7 = new Bumper();
-        Bumper b8 = new Bumper();
+        Bumper b1 = new Bumper()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se)
+            {
+                Sprite sp2 = se.sprite2;
+                
+                double xVel = sp2.getVelX();
+                double yVel = sp2.getVelY();
+                
+                if(se.eventType==CollisionEventType.SPRITE)
+                {
+                    sp2.setVelX(-(this.getVelX()));
+                    sp2.setVelY(-(this.getVelY()));
+                }
+            }
+        };
+
         
         
         
@@ -84,7 +107,10 @@ public class Crokinole
             {
                 Dimension d = getSize();
                 int rad = (int) Math.min(d.getHeight(), d.getWidth())/2;
-                
+                int centerX = getWidth() /2;
+                int centerY = getHeight() / 2;
+                int m = Math.min(centerX, centerY);
+                int r2 = Math.abs(m - rad) / 2;
 
                 g.setColor(Brown);
                 g.fillRect(0, 0, d.width, d.height);
@@ -95,10 +121,7 @@ public class Crokinole
                 g.drawOval((d.width/2 - rad/4), d.height/2 - rad/4,  rad/2, rad/2);
                 g.drawOval((d.width/2 - rad/16), d.height/2 - rad/16,  rad/8, rad/8);
                 
-                int centerX = getWidth() /2;
-                int centerY = getHeight() / 2;
-                int m = Math.min(centerX, centerY);
-                int r2 = Math.abs(m - rad) / 2;
+                
                 
                 g.setColor(Color.blue);
                 for(int i = 0; i < 8; i++) 
@@ -134,7 +157,7 @@ public class Crokinole
                 x = e.getX();
                 y = e.getY();
 
-                JOptionPane.showMessageDialog(sc, "Coordinates: X -" + x + " Y - " + y);
+//                JOptionPane.showMessageDialog(sc, "Coordinates: X -" + x + " Y - " + y);
                 
                 
             }
@@ -156,8 +179,12 @@ public class Crokinole
                 endY =  e.getY() - startY;
                 force = Math.sqrt(Math.pow(endX, 2) + Math.pow(endY, 2));
                 final double width=.005, amp = 10.0;
+                
+                
                 pP.setVelX((amp * Math.tanh(width * force)) * (endX/force));
                 pP.setVelY((amp * Math.tanh(width * force)) * (endY/force));
+//                pG.setVelX((amp * Math.tanh(width * force)) * (endX/force));
+//                pG.setVelY((amp * Math.tanh(width * force)) * (endX/force));
 //                JOptionPane.showMessageDialog(sc, "Distance - " + (endX - endY) + "Coord X-" + xCoord + "Y-" + yCoord);
                 
                 
@@ -178,7 +205,44 @@ public class Crokinole
      
 
         sc.setPreferredSize(new Dimension(1920, 1000));
-
+        
+//        String[][] splashlayout = {
+//            {"Title"},
+//            {"Start Game"},
+//            {"How To Play"}
+//            
+//        };
+//        bc1.add(splashlayout, "Title", new JLabel("Crokinole!"));
+//        JButton jstart = new JButton("Start Game");
+//        jstart.addActionListener(new ActionListener()
+//                {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//                    cards.show(cont,"Start Game");
+//                    
+//                    bc2.requestFocus();
+//                }
+//            });
+//        bc1.add(splashlayout, "Start Game", jstart);
+//        
+//        bc2.add(splashlayout, "How To Play", new JLabel("How To Play"));
+//        JButton howTo = new JButton("How To Play?");
+//        
+//        howTo.addActionListener(new ActionListener()
+//        {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) 
+//            {
+//                cards.show(cont, "How To Play");
+//                
+//                bc3.requestFocus();
+//            }
+//            
+//        });
+        
+        
+        
+        
         bf.add(layout, "game", sc);
         bf.add(layout, "leftTop", new JLabel("Purple Score -" + scoreP));
         bf.add(layout, "leftBot", new JLabel("Gold Score -" + scoreG));
@@ -210,13 +274,7 @@ public class Crokinole
         pG.pieceG(sc);
         pP.pieceP(sc);
         b1.Bumper(sc);
-//        b2.Bumper(sc, 847, 461);
-//        b3.Bumper(sc, 911, 392);
-//        b4.Bumper(sc, 1015, 390);
-//        b5.Bumper(sc, 1080, 460);
-//        b6.Bumper(sc, 1077, 555);
-//        b7.Bumper(sc, 1015, 618);
-//        b8.Bumper(sc, 911, 618);
+
         
         
                   
