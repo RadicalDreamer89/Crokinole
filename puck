@@ -29,7 +29,6 @@ public class Puck extends Sprite
         setPicture(puckP);
         setCenterX((Math.cos(theta)*radius+d.width/2)+10);
         setCenterY((Math.sin(theta)*radius+d.height/2)+10);
-        System.out.println("HERE");
         setVelX(0);
         setVelY(0);
         this.sc = sc;
@@ -125,6 +124,8 @@ public class Puck extends Sprite
 
         
     }
+    
+    
     
     
     
