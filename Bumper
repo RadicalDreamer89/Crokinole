@@ -11,7 +11,7 @@ public class Bumper extends Sprite
 {
     int bumpSize = 10;
    
-    public Bumper(SpriteComponent sc, int x, int y)
+    public Bumper(SpriteComponent sc)
     {   
         Dimension d = new Dimension(15,15);
         int centerX = sc.getWidth() /2;
@@ -27,7 +27,6 @@ public class Bumper extends Sprite
         imgr.setColor(Color.DARK_GRAY);
         imgr.drawOval(0, 0, bumpSize, bumpSize);
         imgr.fillOval(0, 0, bumpSize, bumpSize);
-        
 
         
         Picture bump = new Picture(im1);
