@@ -60,13 +60,7 @@ public class Crokinole {
                     double xVel1 = this.getVelX();
                     double yVel1 = this.getVelY();
 
-                    if(sp2.getClass().equals(Bumper.class))
-                    {
-                        this.setVelX(-(this.getVelX()));
-                        this.setVelY(-(this.getVelY()));
-                    }
-                    else
-                    {
+                    
                     sp2.setVelX(xVel1);
                     sp2.setVelY(yVel1);
                     
@@ -83,7 +77,7 @@ public class Crokinole {
                     
                 }
                 }
-            }
+            
         };
         final Puck pG = new Puck();
 
