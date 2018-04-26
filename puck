@@ -53,8 +53,8 @@ public class Puck extends Sprite
         imgr.fillOval(0, 0, size, size);
         Picture puckG = new Picture(im1);
         setPicture(puckG);
-        setCenterX(500);
-        setCenterY(500);
+        setCenterX(sc.getWidth()/2);
+        setCenterY(sc.getHeight()/2);
         setVelX(0);
         setVelY(0);
         this.sc = sc;
@@ -106,9 +106,9 @@ public class Puck extends Sprite
     public void postMove()
     {
         Dimension dim = sc.getSize();
-        int radius = (int)(Math.min(dim.height,dim.width) / 2)+10;
         double centerX = dim.getWidth()/2;
         double centerY = dim.getHeight()/2;
+        int radius = (int)(Math.min(dim.height,dim.width) / 2)+30;
         double puckLoc = Math.sqrt(Math.pow(this.getX() - centerX,2) + Math.pow(this.getY()- centerY,2));
         if(puckLoc > radius ||  puckLoc > radius)
             this.setActive(false);
@@ -117,7 +117,7 @@ public class Puck extends Sprite
         {
             double x = this.getVelX();
             double y = this.getVelY();
-            double drag = 0.997;
+            double drag = 0.99;
             
             this.setVelX(x *= drag);
             this.setVelY(y *= drag);
