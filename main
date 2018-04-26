@@ -39,13 +39,7 @@ public class Crokinole {
         BasicFrame bf = new BasicFrame("Crokinole!");
         final Container cont = bf.getContentPane();
         final CardLayout cards = new CardLayout();
-//        cont.setLayout(cards);
-//        BasicContainer bc1 = new BasicContainer();
-//        cont.add(bc1, "Splash");
-//        final BasicContainer bc2 = new BasicContainer();
-//        cont.add(bc2, "About");
-//        final BasicContainer bc3 = new BasicContainer();
-//        cont.add(bc3, "Game");
+
 
         final Color Brown = new Color(172, 138, 115);
         int puckCountP = 12;
@@ -82,7 +76,7 @@ public class Crokinole {
                         this.setVelY(-yVel1);
                     }
                     try {
-                        Thread.sleep(20);
+                        Thread.sleep(10);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Crokinole.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -206,7 +200,7 @@ public class Crokinole {
             double dist = 2 * Math.PI * i / 8;
             int xLoc = (int) Math.round((centerX - 5) + rad / 4 * Math.cos(dist));
             int yLoc = (int) Math.round((centerY - 5) + rad / 4 * Math.sin(dist));
-            final Bumper b = new Bumper(sc, xLoc, yLoc)
+            final Bumper b = new Bumper(sc)
             {
                 @Override
             public void processEvent(SpriteCollisionEvent se)
@@ -232,11 +226,6 @@ public class Crokinole {
             b.setX(xLoc);
             b.setY(yLoc);
 
-//            try {
-//                Thread.sleep(10);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(Crokinole.class.getName()).log(Level.SEVERE, null, ex);
-//            }
         }
         pG.pieceG(sc);
         pP.pieceP(sc);
