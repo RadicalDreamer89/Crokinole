@@ -77,30 +77,7 @@ public class Puck extends Sprite
         setCenterX((Math.cos(theta)*radius+d.width/2)+10);
         setCenterY((Math.sin(theta)*radius+d.height/2)+10);
     }
-    
-    @Override
-    public void preMove()
-    {
-       
-    }
 
-//    @Override
-//    public void processEvent(SpriteCollisionEvent se)
-//    {
-//        if(se.eventType==CollisionEventType.SPRITE)
-//        {
-//            double xVel = this.getVelX();
-//            double yVel = this.getVelY();
-//            
-//            Sprite sp2 = se.sprite2;
-//            
-//            setVelX(xVel);
-//            setVelY(yVel);
-//
-//            
-//        }
-//    }
-    
     @Override
     public void postMove()
     {
