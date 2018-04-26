@@ -2,30 +2,38 @@ package basicgraphics;
 
 import basicgraphics.images.Picture;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.RenderingHints;
+
 
 public class Bumper extends Sprite
 {
-    int size = 10;
-    private SpriteComponent sc;
-    public void Bumper(SpriteComponent sc)
+    int bumpSize = 10;
+   
+    public Bumper(SpriteComponent sc, int x, int y)
     {   
+        Dimension d = new Dimension(15,15);
+        int centerX = sc.getWidth() /2;
+        int centerY = sc.getHeight() / 2;
+        int m = Math.min(centerX, centerY);
+        int rad = (int) Math.min(d.getHeight(), d.getWidth())/2;
+        int r2 = Math.abs(m - rad) / 2;
+        final int xVel = 0;
+        final int yVel = 0;
         
-        
-        
-        Image im1 = BasicFrame.createImage(size+5, size+5);
+        Image im1 = BasicFrame.createImage(bumpSize + 5, bumpSize + 5);
         Graphics imgr = im1.getGraphics();
         imgr.setColor(Color.DARK_GRAY);
-        imgr.drawOval(0, 0, size, size);
-        imgr.fillOval(0, 0, size, size);
+        imgr.drawOval(0, 0, bumpSize, bumpSize);
+        imgr.fillOval(0, 0, bumpSize, bumpSize);
+        
+
+        
         Picture bump = new Picture(im1);
         setPicture(bump);
-        setVelX(0);
-        setVelY(0);
-        this.sc = sc;
+        setVelX(xVel);
+        setVelY(yVel);
         sc.addSprite(this);
         
     }
