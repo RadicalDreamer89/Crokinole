@@ -29,10 +29,10 @@ import javax.swing.JLabel;
 public class Crokinole 
 {
     static String[][] layout = {
-        {"leftTop","game","puckCountP"},
-        {"leftTop","game","puckCountP"},
-        {"leftBot","game","puckCountG"},
-        {"leftBot","game","puckCountG"},
+        {"game","puckCountP"},
+        {"game","puckCountP"},
+        {"game","puckCountG"},
+        {"game","puckCountG"},
     };
     
     public static void main(String[] args) {
@@ -71,8 +71,8 @@ public class Crokinole
                     sp2.setVelX(xVel1);
                     sp2.setVelY(yVel1);
                     
-                    this.setVelX(-xVel2);
-                    this.setVelY(-yVel2);
+                    this.setVelX(-xVel1*0.25);
+                    this.setVelY(-yVel1*0.25);
 
                 }
             }  
@@ -123,10 +123,10 @@ public class Crokinole
                 
                 
                 
-                g.setColor(Color.blue);
+//                g.setColor(Color.blue);
                 for(int i = 0; i < 8; i++) 
                 {
-                    double dist = 2 * Math.PI * i / 8;
+                    double dist = 2 * Math.PI / 8;
                     int x = (int) Math.round(centerX + rad * Math.cos(dist));
                     int y = (int) Math.round(centerY + rad * Math.sin(dist));
                     g.drawOval(centerX - rad, centerY - rad, 2 * rad, 2 * rad);
@@ -174,22 +174,26 @@ public class Crokinole
             @Override
             public void mouseReleased(MouseEvent e) 
             {
-                
+                int puckCount = 24;
                 endX =  e.getX() - startX;
                 endY =  e.getY() - startY;
                 force = Math.sqrt(Math.pow(endX, 2) + Math.pow(endY, 2));
                 final double width=.005, amp = 10.0;
                 
-                
-                pP.setVelX((amp * Math.tanh(width * force)) * (endX/force));
-                pP.setVelY((amp * Math.tanh(width * force)) * (endY/force));
-//                pG.setVelX((amp * Math.tanh(width * force)) * (endX/force));
-//                pG.setVelY((amp * Math.tanh(width * force)) * (endX/force));
-//                JOptionPane.showMessageDialog(sc, "Distance - " + (endX - endY) + "Coord X-" + xCoord + "Y-" + yCoord);
-                
-                
-                       
-                
+                for(int i = 0; i < puckCount; i++)
+                {
+                    if(puckCount % 2 == 0)
+                    {
+                         pP.setVelX((amp * Math.tanh(width * force)) * (endX/force));
+                         pP.setVelY((amp * Math.tanh(width * force)) * (endY/force));
+                    }
+                    else if(puckCount % 2 == 1)
+                    {
+                         pG.setVelX((amp * Math.tanh(width * force)) * (endX/force));
+                         pG.setVelY((amp * Math.tanh(width * force)) * (endY/force));
+                    }
+                    
+                }  
             }
 
             @Override
@@ -244,8 +248,6 @@ public class Crokinole
         
         
         bf.add(layout, "game", sc);
-        bf.add(layout, "leftTop", new JLabel("Purple Score -" + scoreP));
-        bf.add(layout, "leftBot", new JLabel("Gold Score -" + scoreG));
         bf.add(layout, "puckCountP", new JLabel("Purple Pucks Remaining - " + puckCountP));
         bf.add(layout, "puckCountG", new JLabel("Gold Pucks Remaining - " + puckCountG));
         
