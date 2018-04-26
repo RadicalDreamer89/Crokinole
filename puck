@@ -101,10 +101,5 @@ public class Puck extends Sprite
 
         
     }
-    
-    
-    
-    
-    
- 
+
 }
