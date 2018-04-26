@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.shape.Circle;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,16 +27,14 @@ import javax.swing.JLabel;
  * @author Warren "Not Wayne" Douglas, wdougl6
  * @since 29th March, 2018
  */
+public class Crokinole {
 
-public class Crokinole 
-{
     static String[][] layout = {
-        {"game","puckCountP"},
-        {"game","puckCountP"},
-        {"game","puckCountG"},
-        {"game","puckCountG"},
-    };
-    
+        {"game", "puckCountP"},
+        {"game", "puckCountP"},
+        {"game", "puckCountG"},
+        {"game", "puckCountG"},};
+
     public static void main(String[] args) {
         BasicFrame bf = new BasicFrame("Crokinole!");
         final Container cont = bf.getContentPane();
@@ -46,154 +46,122 @@ public class Crokinole
 //        cont.add(bc2, "About");
 //        final BasicContainer bc3 = new BasicContainer();
 //        cont.add(bc3, "Game");
-               
+
         final Color Brown = new Color(172, 138, 115);
         int puckCountP = 12;
         int puckCountG = 12;
         int scoreP = 0;
         int scoreG = 0;
-        
-        final Puck pP = new Puck()
-        {
-          @Override
-            public void processEvent(SpriteCollisionEvent se)
-            {
-          
-                if(se.eventType==CollisionEventType.SPRITE)
-                {
+
+        final Puck pP = new Puck() {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) {
+
+                if (se.eventType == CollisionEventType.SPRITE) {
+                    System.out.println("Purple ball: "  + this.getVelX() + ", " + this.getVelY());
                     Sprite sp2 = se.sprite2;
-                    
+
                     double xVel2 = sp2.getVelX();
                     double yVel2 = sp2.getVelY();
                     double xVel1 = this.getVelX();
                     double yVel1 = this.getVelY();
-                    
+
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-(this.getVelX()));
+                        this.setVelY(-(this.getVelY()));
+                    }
+                    else
+                    {
                     sp2.setVelX(xVel1);
                     sp2.setVelY(yVel1);
                     
-                    this.setVelX(-xVel1*0.25);
-                    this.setVelY(-yVel1*0.25);
-
+                    if(this.getVelX() != 0 && this.getVelY() !=0)
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                    }
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Crokinole.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                 }
-            }  
-        };
-        final Puck pG = new Puck();
-        Bumper b1 = new Bumper()
-        {
-            @Override
-            public void processEvent(SpriteCollisionEvent se)
-            {
-                Sprite sp2 = se.sprite2;
-                
-                double xVel = sp2.getVelX();
-                double yVel = sp2.getVelY();
-                
-                if(se.eventType==CollisionEventType.SPRITE)
-                {
-                    sp2.setVelX(-(this.getVelX()));
-                    sp2.setVelY(-(this.getVelY()));
                 }
             }
         };
+        final Puck pG = new Puck();
 
-        
-        
-        
-        
-        final SpriteComponent sc = new SpriteComponent() 
-        {
+        final SpriteComponent sc = new SpriteComponent() {
             @Override
-            public void paintBackground(Graphics g) 
-            {
+            public void paintBackground(Graphics g) {
                 Dimension d = getSize();
-                int rad = (int) Math.min(d.getHeight(), d.getWidth())/2;
-                int centerX = getWidth() /2;
+                SpriteComponent bu = new SpriteComponent();
+                int rad = (int) Math.min(d.getHeight(), d.getWidth()) / 2;
+                int centerX = getWidth() / 2;
                 int centerY = getHeight() / 2;
                 int m = Math.min(centerX, centerY);
                 int r2 = Math.abs(m - rad) / 2;
 
                 g.setColor(Brown);
                 g.fillRect(0, 0, d.width, d.height);
-                
+
                 g.setColor(Color.BLACK);
-                g.drawOval(d.width/2 - rad, d.height/2 - rad, 2 * rad, 2 * rad);
-                g.drawOval((d.width/2 - rad/2), d.height/2 - rad/2,  rad, rad);
-                g.drawOval((d.width/2 - rad/4), d.height/2 - rad/4,  rad/2, rad/2);
-                g.drawOval((d.width/2 - rad/16), d.height/2 - rad/16,  rad/8, rad/8);
-                
-                
-                
-//                g.setColor(Color.blue);
-                for(int i = 0; i < 8; i++) 
-                {
-                    double dist = 2 * Math.PI / 8;
-                    int x = (int) Math.round(centerX + rad * Math.cos(dist));
-                    int y = (int) Math.round(centerY + rad * Math.sin(dist));
-                    g.drawOval(centerX - rad, centerY - rad, 2 * rad, 2 * rad);
-                    g.fillOval(x - r2, y - r2, 2 * r2, 2 * r2);
-                }
-                
-                g.drawLine(d.width/2, 1000, d.width/2, 750);
-                g.drawLine(d.width/2, 0, d.width/2, 250);
+                g.drawOval(d.width / 2 - rad, d.height / 2 - rad, 2 * rad, 2 * rad);
+                g.drawOval((d.width / 2 - rad / 2), d.height / 2 - rad / 2, rad, rad);
+                g.drawOval((d.width / 2 - rad / 4), d.height / 2 - rad / 4, rad / 2, rad / 2);
+                g.drawOval((d.width / 2 - rad / 16), d.height / 2 - rad / 16, rad / 8, rad / 8);
+
+                g.drawLine(d.width / 2, 1000, d.width / 2, 750);
+                g.drawLine(d.width / 2, 0, d.width / 2, 250);
                 g.drawLine(460, 500, 710, 500);
-                g.drawLine(1210, 500, 1460, 500);                
-                
+                g.drawLine(1210, 500, 1460, 500);
+
             }
 
-                };
+        };
 
-        
-        
-        MouseListener ml = new MouseListener() 
-        {
-            double force= 0; 
+
+        MouseListener ml = new MouseListener() {
+            double force = 0;
             double startX, startY;
             double endX, endY;
-            
+
             @Override
-            public void mouseClicked(MouseEvent e) 
-            {
+            public void mouseClicked(MouseEvent e) {
                 int x, y;
                 x = e.getX();
                 y = e.getY();
 
-//                JOptionPane.showMessageDialog(sc, "Coordinates: X -" + x + " Y - " + y);
-                
-                
+
             }
 
-            
             @Override
-            public void mousePressed(MouseEvent e) 
-            {
+            public void mousePressed(MouseEvent e) {
                 startX = e.getX();
                 startY = e.getY();
-                
+
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) 
-            {
+            public void mouseReleased(MouseEvent e) {
                 int puckCount = 24;
-                endX =  e.getX() - startX;
-                endY =  e.getY() - startY;
+                endX = e.getX() - startX;
+                endY = e.getY() - startY;
                 force = Math.sqrt(Math.pow(endX, 2) + Math.pow(endY, 2));
-                final double width=.005, amp = 10.0;
-                
-                for(int i = 0; i < puckCount; i++)
-                {
-                    if(puckCount % 2 == 0)
-                    {
-                         pP.setVelX((amp * Math.tanh(width * force)) * (endX/force));
-                         pP.setVelY((amp * Math.tanh(width * force)) * (endY/force));
+                final double width = .005, amp = 10.0;
+
+                for (int i = 0; i < puckCount; i++) {
+                    if (puckCount % 2 == 0) {
+                        pP.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        pP.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                    } else if (puckCount % 2 == 1) {
+                        pG.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        pG.setVelY((amp * Math.tanh(width * force)) * (endY / force));
                     }
-                    else if(puckCount % 2 == 1)
-                    {
-                         pG.setVelX((amp * Math.tanh(width * force)) * (endX/force));
-                         pG.setVelY((amp * Math.tanh(width * force)) * (endY/force));
-                    }
-                    
-                }  
+
+                }
             }
 
             @Override
@@ -205,60 +173,19 @@ public class Crokinole
             }
         };
         sc.addMouseListener(ml);
-        
-     
 
         sc.setPreferredSize(new Dimension(1920, 1000));
-        
-//        String[][] splashlayout = {
-//            {"Title"},
-//            {"Start Game"},
-//            {"How To Play"}
-//            
-//        };
-//        bc1.add(splashlayout, "Title", new JLabel("Crokinole!"));
-//        JButton jstart = new JButton("Start Game");
-//        jstart.addActionListener(new ActionListener()
-//                {
-//                    @Override
-//                    public void actionPerformed(ActionEvent e) {
-//                    cards.show(cont,"Start Game");
-//                    
-//                    bc2.requestFocus();
-//                }
-//            });
-//        bc1.add(splashlayout, "Start Game", jstart);
-//        
-//        bc2.add(splashlayout, "How To Play", new JLabel("How To Play"));
-//        JButton howTo = new JButton("How To Play?");
-//        
-//        howTo.addActionListener(new ActionListener()
-//        {
-//            @Override
-//            public void actionPerformed(ActionEvent ae) 
-//            {
-//                cards.show(cont, "How To Play");
-//                
-//                bc3.requestFocus();
-//            }
-//            
-//        });
-        
-        
-        
-        
+
         bf.add(layout, "game", sc);
         bf.add(layout, "puckCountP", new JLabel("Purple Pucks Remaining - " + puckCountP));
         bf.add(layout, "puckCountG", new JLabel("Gold Pucks Remaining - " + puckCountG));
-        
-        
-        
+
         bf.addKeyListener(new KeyAdapter() {
 
             @Override
             public void keyPressed(KeyEvent ke) {
                 switch (ke.getKeyCode()) {
-    
+
                     case KeyEvent.VK_RIGHT:
                         pP.moveRight();
                         break;
@@ -270,18 +197,52 @@ public class Crokinole
 
         });
 
-        
-
         bf.show();
+        Dimension d = sc.getSize();
+        int rad = (int) Math.min(d.getHeight(), d.getWidth()) / 2;
+        int centerX = d.width/2;
+        int centerY = d.height/2;
+        for (int i = 0; i <= 8; i++) {
+            double dist = 2 * Math.PI * i / 8;
+            int xLoc = (int) Math.round((centerX - 5) + rad / 4 * Math.cos(dist));
+            int yLoc = (int) Math.round((centerY - 5) + rad / 4 * Math.sin(dist));
+            final Bumper b = new Bumper(sc, xLoc, yLoc)
+            {
+                @Override
+            public void processEvent(SpriteCollisionEvent se)
+            {
+                Sprite sp2 = se.sprite2;
+                
+                double xVel = sp2.getVelX();
+                double yVel = sp2.getVelY();
+                
+                if(se.eventType==CollisionEventType.SPRITE)
+                {
+                    System.out.println("Gray ball: " + this.getVelX() + ", " + this.getVelY());
+                    sp2.setVelX(-(xVel));
+                    sp2.setVelY(-(yVel));
+                    
+                    this.setVelX(0);
+                    this.setVelY(0);
+                }
+                    
+                }
+                
+            };
+            b.setX(xLoc);
+            b.setY(yLoc);
+
+//            try {
+//                Thread.sleep(10);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(Crokinole.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+        }
         pG.pieceG(sc);
         pP.pieceP(sc);
-        b1.Bumper(sc);
 
-        
-        
-                  
-        sc.start(0,10);
-        
+
+        sc.start(0, 10);
 
     }
 }
