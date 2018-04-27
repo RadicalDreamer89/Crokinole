@@ -19,20 +19,19 @@ public class Bumper extends Sprite
         int m = Math.min(centerX, centerY);
         int rad = (int) Math.min(d.getHeight(), d.getWidth())/2;
         int r2 = Math.abs(m - rad) / 2;
-        final int xVel = 0;
-        final int yVel = 0;
+//        final int xVel = 0;
+//        final int yVel = 0;
         
         Image im1 = BasicFrame.createImage(bumpSize + 5, bumpSize + 5);
         Graphics imgr = im1.getGraphics();
         imgr.setColor(Color.DARK_GRAY);
         imgr.drawOval(0, 0, bumpSize, bumpSize);
         imgr.fillOval(0, 0, bumpSize, bumpSize);
-
-        
+  
         Picture bump = new Picture(im1);
         setPicture(bump);
-        setVelX(xVel);
-        setVelY(yVel);
+        setVelX(0);
+        setVelY(0);
         sc.addSprite(this);
         
     }
