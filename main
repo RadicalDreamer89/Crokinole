@@ -9,18 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.shape.Circle;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+
 
 /**
  *
@@ -42,48 +36,759 @@ public class Crokinole {
 
 
         final Color Brown = new Color(172, 138, 115);
-        int puckCountP = 12;
-        int puckCountG = 12;
+        int puckCount = 24;
         int scoreP = 0;
         int scoreG = 0;
 
-        final Puck pP = new Puck() {
+        final Puck p1 = new Puck() {
             @Override
-            public void processEvent(SpriteCollisionEvent se) {
+            public void processEvent(SpriteCollisionEvent se) 
+            {
 
-                if (se.eventType == CollisionEventType.SPRITE) {
-                    System.out.println("Purple ball: "  + this.getVelX() + ", " + this.getVelY());
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
                     Sprite sp2 = se.sprite2;
 
                     double xVel2 = sp2.getVelX();
                     double yVel2 = sp2.getVelY();
                     double xVel1 = this.getVelX();
                     double yVel1 = this.getVelY();
-
                     
-                    sp2.setVelX(xVel1);
-                    sp2.setVelY(yVel1);
-                    
-                    if(this.getVelX() != 0 && this.getVelY() !=0)
+                    if(sp2.getClass().equals(Bumper.class))
                     {
                         this.setVelX(-xVel1);
                         this.setVelY(-yVel1);
+                        
                     }
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Crokinole.class.getName()).log(Level.SEVERE, null, ex);
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
                     }
+                    
+                  
                     
                 }
                 }
             
         };
-        final Puck pG = new Puck();
-
-        final SpriteComponent sc = new SpriteComponent() {
+        final Puck p2 = new Puck() {
             @Override
-            public void paintBackground(Graphics g) {
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
+                    }
+                    
+                  
+                    
+                }
+                }
+            
+        };
+        
+        final Puck p3 = new Puck() {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
+                    }
+                    
+                  
+                    
+                }
+                }
+            
+        };
+        
+        final Puck p4 = new Puck() {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
+                    }
+                    
+                  
+                    
+                }
+                }
+            
+        };
+        
+        final Puck p5 = new Puck() {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
+                    }
+                    
+                  
+                    
+                }
+                }
+            
+        };
+        
+        final Puck p6 = new Puck() {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
+                    }
+                    
+                  
+                    
+                }
+                }
+            
+        };
+        
+        final Puck p7 = new Puck() {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
+                    }
+                    
+                  
+                    
+                }
+                }
+            
+        };
+        
+        final Puck p8 = new Puck() {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
+                    }
+                    
+                  
+                    
+                }
+                }
+            
+        };
+        
+        final Puck p9 = new Puck() {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
+                    }
+                    
+                  
+                    
+                }
+                }
+            
+        };
+        
+        final Puck p10 = new Puck() {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
+                    }
+                    
+                  
+                    
+                }
+                }
+            
+        };
+        
+        final Puck p11 = new Puck() {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
+                    }
+                    
+                  
+                    
+                }
+                }
+            
+        };
+        
+        final Puck p12 = new Puck() {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                    else if(sp2.getClass().equals(Puck.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        sp2.setVelX(xVel1);
+                        sp2.setVelY(yVel1);
+                    }
+                    
+                  
+                    
+                }
+                }
+            
+        };
+        
+        
+        final Puck g1 = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+        
+        final Puck g2 = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+        
+        final Puck g3 = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+        
+        final Puck g4 = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+        
+        final Puck g5 = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+        
+        final Puck g6 = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+        
+        final Puck g7 = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+        
+        final Puck g8 = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+        
+        final Puck g9 = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+        
+        final Puck g10 = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+        
+        final Puck g11 = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+        
+        final Puck lastG = new Puck()
+        {
+            @Override
+            public void processEvent(SpriteCollisionEvent se) 
+            {
+
+                if (se.eventType == CollisionEventType.SPRITE) 
+                {
+                    
+                    Sprite sp2 = se.sprite2;
+
+                    double xVel2 = sp2.getVelX();
+                    double yVel2 = sp2.getVelY();
+                    double xVel1 = this.getVelX();
+                    double yVel1 = this.getVelY();
+                    
+                    if(sp2.getClass().equals(Bumper.class))
+                    {
+                        this.setVelX(-xVel1);
+                        this.setVelY(-yVel1);
+                        
+                    }
+                }
+            }
+        };
+
+        final SpriteComponent sc = new SpriteComponent() 
+        {
+            @Override
+            public void paintBackground(Graphics g) 
+            {
                 Dimension d = getSize();
                 SpriteComponent bu = new SpriteComponent();
                 int rad = (int) Math.min(d.getHeight(), d.getWidth()) / 2;
@@ -111,13 +816,15 @@ public class Crokinole {
         };
 
 
-        MouseListener ml = new MouseListener() {
+        MouseListener ml = new MouseListener() 
+        {
             double force = 0;
             double startX, startY;
             double endX, endY;
 
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) 
+            {
                 int x, y;
                 x = e.getX();
                 y = e.getY();
@@ -126,38 +833,90 @@ public class Crokinole {
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(MouseEvent e) 
+            {
                 startX = e.getX();
                 startY = e.getY();
 
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased(MouseEvent e) 
+            {
                 int puckCount = 24;
                 endX = e.getX() - startX;
                 endY = e.getY() - startY;
                 force = Math.sqrt(Math.pow(endX, 2) + Math.pow(endY, 2));
                 final double width = .005, amp = 10.0;
 
-                for (int i = 0; i < puckCount; i++) {
-                    if (puckCount % 2 == 0) {
-                        pP.setVelX((amp * Math.tanh(width * force)) * (endX / force));
-                        pP.setVelY((amp * Math.tanh(width * force)) * (endY / force));
-                    } else if (puckCount % 2 == 1) {
-                        pG.setVelX((amp * Math.tanh(width * force)) * (endX / force));
-                        pG.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                for (int i = 0; i < puckCount; i++) 
+                {
+                    if (puckCount % 2 == 0) 
+                    {
+                        p1.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p1.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        p2.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p2.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        p3.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p3.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        p4.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p4.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        p5.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p5.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        p6.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p6.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        p7.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p7.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        p8.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p8.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        p9.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p9.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        p10.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p10.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        p11.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p11.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        p12.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        p12.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                    } 
+                    else if (puckCount % 2 == 1) 
+                    {
+                        g1.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        g1.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        g2.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        g2.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        g3.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        g3.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        g4.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        g4.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        g5.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        g5.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        g6.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        g6.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        g7.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        g7.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        g8.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        g8.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        g9.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        g9.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        g10.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        g10.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        g11.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        g11.setVelY((amp * Math.tanh(width * force)) * (endY / force));
+                        lastG.setVelX((amp * Math.tanh(width * force)) * (endX / force));
+                        lastG.setVelY((amp * Math.tanh(width * force)) * (endY / force));
                     }
 
                 }
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered(MouseEvent e) 
+            {
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited(MouseEvent e) 
+            {
             }
         };
         sc.addMouseListener(ml);
@@ -165,64 +924,72 @@ public class Crokinole {
         sc.setPreferredSize(new Dimension(1920, 1000));
 
         bf.add(layout, "game", sc);
-        bf.add(layout, "puckCountP", new JLabel("Purple Pucks Remaining - " + puckCountP));
-        bf.add(layout, "puckCountG", new JLabel("Gold Pucks Remaining - " + puckCountG));
-
-        bf.addKeyListener(new KeyAdapter() {
+       
+        bf.addKeyListener(new KeyAdapter() 
+        {
 
             @Override
-            public void keyPressed(KeyEvent ke) {
-                switch (ke.getKeyCode()) {
-
-                    case KeyEvent.VK_RIGHT:
-                        pP.moveRight();
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        pP.moveLeft();
-
+            public void keyPressed(KeyEvent ke) 
+            {
+                
+                switch (ke.getKeyCode()) 
+                {
+                    
+                        case KeyEvent.VK_RIGHT:
+                            p1.moveRight();
+                            break;
+                        case KeyEvent.VK_LEFT:
+                            p1.moveLeft();
+                            break;
                 }
             }
 
         });
 
         bf.show();
+        
+        
+        
         Dimension d = sc.getSize();
         int rad = (int) Math.min(d.getHeight(), d.getWidth()) / 2;
         int centerX = d.width/2;
         int centerY = d.height/2;
-        for (int i = 0; i <= 8; i++) {
+        for (int i = 0; i <= 8; i++) 
+        {
             double dist = 2 * Math.PI * i / 8;
             int xLoc = (int) Math.round((centerX - 5) + rad / 4 * Math.cos(dist));
             int yLoc = (int) Math.round((centerY - 5) + rad / 4 * Math.sin(dist));
-            final Bumper b = new Bumper(sc)
-            {
-                @Override
-            public void processEvent(SpriteCollisionEvent se)
-            {
-                Sprite sp2 = se.sprite2;
-                
-                double xVel = sp2.getVelX();
-                double yVel = sp2.getVelY();
-                
-                if(se.eventType==CollisionEventType.SPRITE)
-                {
-                    System.out.println("Gray ball: " + this.getVelX() + ", " + this.getVelY());
-                    sp2.setVelX(-(xVel));
-                    sp2.setVelY(-(yVel));
-                    
-                    this.setVelX(0);
-                    this.setVelY(0);
-                }
-                    
-                }
-                
-            };
+            final Bumper b = new Bumper(sc);
+            
+            
             b.setX(xLoc);
             b.setY(yLoc);
 
         }
-        pG.pieceG(sc);
-        pP.pieceP(sc);
+        g1.pieceG(sc);
+        g2.pieceG(sc);
+        g3.pieceG(sc);
+        g4.pieceG(sc);
+        g5.pieceG(sc);
+        g6.pieceG(sc);
+        g7.pieceG(sc);
+        g8.pieceG(sc);
+        g9.pieceG(sc);
+        g10.pieceG(sc);
+        g11.pieceG(sc);
+        lastG.pieceG(sc);
+        p1.pieceP(sc);
+        p2.pieceP(sc);
+        p3.pieceP(sc);
+        p4.pieceP(sc);
+        p5.pieceP(sc);
+        p6.pieceP(sc);
+        p7.pieceP(sc);
+        p8.pieceP(sc);
+        p9.pieceP(sc);
+        p10.pieceP(sc);
+        p11.pieceP(sc);
+        p12.pieceP(sc);
 
 
         sc.start(0, 10);
